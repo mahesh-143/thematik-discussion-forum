@@ -1,18 +1,26 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
-    FormControl,
-    FormLabel, 
-    FormErrorMessage,
-    Input,
-    Box,
-    Button,
-    Heading,
-    Text,
-    HStack
-} from '@chakra-ui/react'
-import ForgotPassword from '../modals/ForgotPassword'
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Text,
+} from "@chakra-ui/react";
+import ForgotPassword from './ForgotPassword'
 
-const SigninForm = () => {
+const Signin = () => {
+    const { onOpen, isOpen, onClose } = useDisclosure();
 
     const [input, setInput] = useState('')
     const [password,  setPassword] = useState('')
@@ -34,7 +42,26 @@ const SigninForm = () => {
     
 
   return (
-    <Box bg='white' pb="2em" px="1em">
+    <>
+    <Button
+    fontSize="1rem"
+    bg="brand.100"
+    color="white"
+    fontWeight="normal"
+    size={{ base: "sm", md: "md" }}
+    borderRadius={5}
+    onClick={onOpen}
+  >
+    Sign In
+  </Button>
+    <Modal isOpen={isOpen} onClose={onClose}>
+    <ModalOverlay />
+    <ModalContent>
+        <ModalHeader>
+            <ModalCloseButton />
+        </ModalHeader>
+        <ModalBody>
+        <Box bg='white' pb="2em" px="1em">
     <Heading mb='0.5em'>Sign In</Heading>
     <form onSubmit={handleSubmit}>
         <FormControl isInvalid={isError} isRequired>
@@ -71,7 +98,11 @@ const SigninForm = () => {
     <Text opacity='50%' fontSize='sm'>New to Thematick?</Text><Button variant='link' fontWeight='medium' color='black' fontSize='sm'>Sign up now</Button>
     </HStack>
     </Box>  
+        </ModalBody>
+    </ModalContent>
+</Modal>
+</>
   )
 }
 
-export default SigninForm
+export default Signin
