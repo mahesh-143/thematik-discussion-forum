@@ -18,7 +18,15 @@ export const theme = extendTheme({
     },
     fonts: {
         body: `'roboto', sans-serif`,
-      }
+      },
+
+    components : {
+        Heading : {
+            baseStyle : {
+                fontFamily : 'Playfair Display'
+            }
+        }
+    }
 
 })
 
