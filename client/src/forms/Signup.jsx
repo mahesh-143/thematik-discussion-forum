@@ -40,7 +40,6 @@ import {
       <Flex
         as="form"
         onSubmit={handleSubmit}
-        minHeight="100vh"
         alignItems="center"
         justifyContent="center"
       >

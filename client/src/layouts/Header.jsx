@@ -6,19 +6,33 @@ import {
   Container,
   HStack,
   IconButton,
-} from "@chakra-ui/react";
-import { BellIcon } from "@chakra-ui/icons";
-import Logo from "../components/Logo";
-import Searchbar from "../components/Searchbar";
-import { SearchIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+} from "@chakra-ui/react"
+import { BellIcon, HamburgerIcon, SearchIcon } from "@chakra-ui/icons"
+import Logo from "../components/Logo"
+import Searchbar from "../components/Searchbar"
+import { Link } from "react-router-dom"
 
 const Header = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = false
   return (
-    <Box bg="white" boxShadow="sm" position="fixed" width="full">
+    <Box
+      bg="white"
+      boxShadow="sm"
+      position="sticky"
+      top="0"
+      left="0"
+      zIndex="2"
+      width="full"
+    >
       <Container maxW="container.xl">
         <Flex align="center" py="1rem" justifyContent="space-between">
+          <IconButton
+            aria-label="open sidebar"
+            icon={<HamburgerIcon />}
+            display={{ md: "none" }}
+            size="sm"
+            variant="outline"
+          />
           <Logo />
           <Searchbar />
           <HStack>
@@ -63,7 +77,7 @@ const Header = () => {
                     fontSize="1rem"
                     bg="brand.100"
                     color="white"
-                    fontWeight="normal" 
+                    fontWeight="normal"
                     borderRadius={5}
                     size={{ base: "sm", md: "md" }}
                   >
@@ -76,7 +90,7 @@ const Header = () => {
         </Flex>
       </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
