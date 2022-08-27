@@ -66,6 +66,7 @@ const Signin = () => {
           <Input
             type="password"
             id="password"
+            pattern="[a-zA-z0-9]{8,}"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             isRequired

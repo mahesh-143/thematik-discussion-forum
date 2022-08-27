@@ -3,7 +3,7 @@ import { StatUpArrow, StatDownArrow } from "@chakra-ui/react"
 
 const Post = () => {
   return (
-    <Box bg="white" maxW="50em" mx="2em" mt="2em" p="1em" borderRadius={5}>
+    <Box bg="white" maxWidth="50em" mx="2em" mt="2em" p="1em" borderRadius={5}>
         <Flex>
             <Flex flexDirection="column" gap="0.5em" marginLeft="1em" marginRight="2em" alignItems="center" justifyContent="center">
              <StatUpArrow />

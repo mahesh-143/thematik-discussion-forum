@@ -2,6 +2,7 @@ import {
     Button,
     Flex,
     FormControl,
+    FormHelperText,
     FormLabel,
     Heading,
     Input,
@@ -79,11 +80,13 @@ import {
             <Input
               type="password"
               id="password"
+              pattern="[a-zA-z0-9]{8,}"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               isRequired
               bg="white"
             />
+            <FormHelperText>Password must be 8 character long</FormHelperText>
           </FormControl>
   
           <Button type="submit" fontWeight="medium" bg="brand.100" w="full">
