@@ -7,11 +7,14 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import WithoutSidebar from "./layouts/WithoutSidebar"
 import WithSidebar from "./layouts/WithSidebar"
+import { useDisclosure } from "@chakra-ui/react"
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <>
-      <Header />
+      <Header onOpen={onOpen} />
 
       <Routes>
         <Route element={<WithoutSidebar />}>
@@ -21,7 +24,7 @@ function App() {
           <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Route>
 
-        <Route element={<WithSidebar />}>
+        <Route element={<WithSidebar isOpen={isOpen} onClose={onClose} />}>
           <Route path="/" element={<Home />} />
         </Route>
       </Routes>

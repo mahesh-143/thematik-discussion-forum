@@ -61,6 +61,7 @@ const SubmitPost = () => {
             fontWeight="normal"
             borderRadius={5}
             alignSelf="flex-end"
+            type="submit"
           >
             Post
           </Button>

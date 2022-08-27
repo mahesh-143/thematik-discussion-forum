@@ -2,11 +2,11 @@ import Sidebar from "./Sidebar"
 import { Outlet } from "react-router-dom"
 import { Container, Flex, HStack } from "@chakra-ui/react"
 
-const WithSidebar = () => {
+const WithSidebar = ({ isOpen, onClose }) => {
   return (
     <Flex>
-    <Sidebar />
-    <Outlet />
+      <Sidebar isOpen={isOpen} onClose={onClose}/>
+      <Outlet />
     </Flex>
   )
 }

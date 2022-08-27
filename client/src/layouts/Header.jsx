@@ -12,7 +12,7 @@ import Logo from "../components/Logo"
 import Searchbar from "../components/Searchbar"
 import { Link } from "react-router-dom"
 
-const Header = () => {
+const Header = ({onOpen}) => {
   const isLoggedIn = false
   return (
     <Box
@@ -27,6 +27,7 @@ const Header = () => {
       <Container maxW="container.xl">
         <Flex align="center" py="1rem" justifyContent="space-between">
           <IconButton
+          onClick={onOpen}
             aria-label="open sidebar"
             icon={<HamburgerIcon />}
             display={{ md: "none" }}
