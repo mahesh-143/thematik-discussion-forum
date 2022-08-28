@@ -20,6 +20,7 @@ const findUserByUsername = (username) => {
 }
 
 const createUser = (user) => {
+  console.log("entered createUser function")
   user.password = bcypt.hashSync(user, password, 12)
   return db.user.create({
     data:user

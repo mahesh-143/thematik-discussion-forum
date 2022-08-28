@@ -49,7 +49,7 @@ router.post("/register", async (req, res, next) => {
       refreshToken,
     })
   } catch (err) {
-    next(err)
+    throw err
   }
 })
 
