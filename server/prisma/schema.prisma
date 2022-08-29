@@ -15,6 +15,7 @@ model User {
   email        String         @unique
   username     String         @unique
   password     String
+  verified     Boolean        @default(true)
   role         Role           @default(BASIC)
   post         Post[]
   comments     Comment[]
