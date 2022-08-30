@@ -18,16 +18,16 @@ function sendAccountVerificationMail(user, password) {
     const token = jwt.sign({ id: user._id }, process.env.JWT_VERIFY_SECRET + password, { expiresIn: '60m' })
     const link = `http://localhost:5000/api/auth/verify/${user.id}/${token}`
     console.log(link);
-    transporter.sendMail({
-        to: user.email,
-        subject: 'OTP verification',
-        html: `<a href=${link}>Verify me</a>`
-    }, (error, info) => {
-        if (error) {
-            throw error
-        }
-        console.log('Message sent: %s', info.messageId);
-        console.log('Preview URL: %s', getTestMessageUrl(info));
-    })
+    // transporter.sendMail({
+    //     to: user.email,
+    //     subject: 'OTP verification',
+    //     html: `<a href=${link}>Verify me</a>`
+    // }, (error, info) => {
+    //     if (error) {
+    //         throw error
+    //     }
+    //     console.log('Message sent: %s', info.messageId);
+    //     console.log('Preview URL: %s', getTestMessageUrl(info));
+    // })
 }
 export { transporter, sendAccountVerificationMail }

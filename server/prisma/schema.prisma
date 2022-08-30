@@ -18,6 +18,7 @@ model User {
   verified     Boolean        @default(true)
   role         Role           @default(BASIC)
   post         Post[]
+  theme        Theme[]
   comments     Comment[]
   votes        Vote[]
   createdAt    DateTime       @default(now())
@@ -43,6 +44,18 @@ model Post {
   author    User      @relation(fields: [authorId], references: [id])
   authorId  String
   comments  Comment[]
+  Theme     Theme?    @relation(fields: [themeId], references: [id], onDelete: Cascade)
+  themeId   String?
+}
+
+model Theme {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  title       String   @unique
+  description String
+  creator     User     @relation(fields: [creatorId], references: [id])
+  creatorId   String
+  post        Post[]
 }
 
 model Comment {
