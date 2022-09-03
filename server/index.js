@@ -22,7 +22,7 @@ app.use('/api', routes)
 app.use((err, req, res, next) => {
     let { message = "Something went wrong", status = 500 } = err
     console.log(err);
-    return res.status(status).json({ message })
+    return res.json({ message })
 })
 
 //server 

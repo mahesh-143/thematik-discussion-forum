@@ -44,7 +44,7 @@ router.post("/register", async (req, res, next) => {
     }
     const { password: userPassword, ...user } = await createUser({ email, username, password })
     sendAccountVerificationMail(user, userPassword)
-    res.json({ message: 'Please verify your email' })
+    res.json({message: 'Please verify your email' })
   } catch (err) {
     next(err)
   }
@@ -93,7 +93,6 @@ router.post('/refreshToken', async (req, res, next) => {
     }
     const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
     const savedRefreshToken = await findRefreshTokenById(payload.jti);
-
     if (!savedRefreshToken || savedRefreshToken.revoked === true) {
       res.status(401);
       throw new Error('Unauthorized');

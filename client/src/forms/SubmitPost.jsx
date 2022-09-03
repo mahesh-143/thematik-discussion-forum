@@ -7,15 +7,35 @@ import {
   VStack,
   Button,
   Heading,
-} from "@chakra-ui/react"
-import { useState } from "react"
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createPost, getThemes } from "../Services/Services";
 
 const SubmitPost = () => {
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState("");
+  const [postBody, setPostBody] = useState("");
+  const [themes, setThemes] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+  const navigate = useNavigate()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { data } = await createPost({
+      title,
+      postBody,
+      theme: e.target.theme.value,
+    });
+    console.log(data);
+    navigate("/")
+    
+  };
+  const fetchThemes = async () => {
+    const { data } = await getThemes();
+    setThemes(data.themes);
+  };
+  useEffect(() => {
+    fetchThemes();
+  }, []);
 
   return (
     <Box maxW="container.md" m="auto" p="2em">
@@ -25,14 +45,18 @@ const SubmitPost = () => {
             Create a Post
           </Heading>
           <Select
-            placeholder="Select Community"
+            placeholder={themes ? "Select Community" : "Loading..."}
+            name="theme"
             bg="white"
             maxW="14em"
             alignSelf="flex-start"
           >
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+            {themes &&
+              themes.map((theme) => (
+                <option key={theme.id} value={theme.id}>
+                  {theme.title}
+                </option>
+              ))}
           </Select>
           <FormControl>
             <Input
@@ -50,6 +74,8 @@ const SubmitPost = () => {
               placeholder="Description(optional)"
               size="sm"
               resize="vertical"
+              value={postBody}
+              onChange={(e) => setPostBody(e.target.value)}
               bg="white"
               borderRadius={5}
             />
@@ -68,7 +94,7 @@ const SubmitPost = () => {
         </VStack>
       </form>
     </Box>
-  )
-}
+  );
+};
 
-export default SubmitPost
+export default SubmitPost;

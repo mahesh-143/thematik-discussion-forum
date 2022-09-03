@@ -6,14 +6,22 @@ import {
   Container,
   HStack,
   IconButton,
-} from "@chakra-ui/react"
-import { BellIcon, HamburgerIcon, SearchIcon } from "@chakra-ui/icons"
-import Logo from "../components/Logo"
-import Searchbar from "../components/Searchbar"
-import { Link } from "react-router-dom"
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
+import { BellIcon, HamburgerIcon, SearchIcon } from "@chakra-ui/icons";
+import Logo from "../components/Logo";
+import Searchbar from "../components/Searchbar";
+import { Link } from "react-router-dom";
+import { useAuth } from "../Hooks/useAuth";
 
-const Header = ({onOpen}) => {
-  const isLoggedIn = false
+const Header = ({ onOpen }) => {
+  const { accessToken, setUserLogout } = useAuth();
+  const logoutHandler = () => {
+    setUserLogout();
+  };
   return (
     <Box
       bg="white"
@@ -24,10 +32,10 @@ const Header = ({onOpen}) => {
       zIndex="2"
       width="full"
     >
-      <Container maxW="container.xl">
+      <Container maxW="1490px">
         <Flex align="center" py="1rem" justifyContent="space-between">
           <IconButton
-          onClick={onOpen}
+            onClick={onOpen}
             aria-label="open sidebar"
             icon={<HamburgerIcon />}
             display={{ md: "none" }}
@@ -46,17 +54,19 @@ const Header = ({onOpen}) => {
               display={{ md: "none" }}
             />
 
-            {isLoggedIn ? (
+            {accessToken ? (
               <Flex align="center" justify="center" gap="1rem">
-                <BellIcon
-                  w={{ base: 6, md: 7 }}
-                  h={{ base: 6, md: 7 }}
-                  opacity="50%"
-                />
-                <Avatar
-                  size="sm"
-                  src={"https://avatars.dicebear.con/api/male/username.svg"}
-                />
+                <Menu>
+                  <MenuButton>
+                    <Avatar
+                      size="sm"
+                      src={"https://avatars.dicebear.con/api/male/username.svg"}
+                    />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                  </MenuList>
+                </Menu>
               </Flex>
             ) : (
               <HStack>
@@ -91,7 +101,7 @@ const Header = ({onOpen}) => {
         </Flex>
       </Container>
     </Box>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

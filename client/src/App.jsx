@@ -8,6 +8,9 @@ import Home from "./pages/Home"
 import WithoutSidebar from "./layouts/WithoutSidebar"
 import WithSidebar from "./layouts/WithSidebar"
 import { useDisclosure } from "@chakra-ui/react"
+import AuthRoute from "./components/AuthRoute"
+import ProtectedRoute from "./components/ProtectedRoute"
+import PostPage from "./pages/PostPage"
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -19,13 +22,28 @@ function App() {
       <Routes>
         <Route element={<WithoutSidebar />}>
           <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/submit" element={<SubmitPost />} />
+          <Route
+            path="/signin"
+            element={
+              <AuthRoute>
+                <Signin />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/submit"
+            element={
+              <ProtectedRoute>
+                <SubmitPost />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Route>
 
         <Route element={<WithSidebar isOpen={isOpen} onClose={onClose} />}>
           <Route path="/" element={<Home />} />
+          <Route path="/post/:id" element={<PostPage />} />
         </Route>
       </Routes>
     </>

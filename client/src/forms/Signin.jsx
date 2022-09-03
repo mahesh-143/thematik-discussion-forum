@@ -9,15 +9,18 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react"
-import { ExternalLinkIcon } from "@chakra-ui/icons"
+import { ExternalLinkIcon, WarningIcon } from "@chakra-ui/icons"
 import { useState, useEffect } from "react"
 import { Link as ReactLink } from "react-router-dom"
+import { loginUser } from "../Services/Services"
+import { useAuth } from "../Hooks/useAuth"
 
 const Signin = () => {
   const [user, setUser] = useState("")
   const [password, setPassword] = useState("")
   const [errorMsg, setErrorMsg] = useState("")
-  const [success, setSuccess] = useState(false)
+
+  const { setUserLogin } = useAuth()
 
   useEffect(() => {
     setErrorMsg("")
@@ -25,15 +28,12 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    alert("form submitted")
-
-    // try {
-    //   setSuccess(true)
-    //   alert(success)
-    // } catch (error) {
-    //   setErrorMsg = "error"
-    //   alert(error)
-    // }
+    try {
+      const { data } = await loginUser({ email: user, password })
+      setUserLogin(data.user, data.accessToken, data.refreshToken)
+    } catch (err) {
+      setErrorMsg(err.message)
+    }
   }
   return (
     <Flex
@@ -49,10 +49,24 @@ const Signin = () => {
             Welcome Back! Please enter your login details
           </Text>
         </Flex>
+        {errorMsg && (
+          <Flex
+            border="0.5px solid red"
+            borderRadius="5"
+            color="red"
+            p="0.5rem"
+            w="full"
+            align="center"
+            gap="1em"
+          >
+            <WarningIcon /> <Text>Error : {errorMsg}</Text>
+          </Flex>
+        )}
+
         <FormControl>
           <FormLabel>Email</FormLabel>
           <Input
-            type="email"
+            // type="email"
             id="email"
             autoComplete="off"
             onChange={(e) => setUser(e.target.value)}
@@ -88,7 +102,18 @@ const Signin = () => {
         <Button type="submit" fontWeight="medium" bg="brand.100" w="full">
           Sign In
         </Button>
-        <Text color="GrayText">Don't have an account? <Link as={ReactLink} to="/signup" color="black" fontWeight="medium" textDecoration="">Sign up now <ExternalLinkIcon /></Link></Text>
+        <Text color="GrayText">
+          Don't have an account?{" "}
+          <Link
+            as={ReactLink}
+            to="/signup"
+            color="black"
+            fontWeight="medium"
+            textDecoration=""
+          >
+            Sign up now <ExternalLinkIcon />
+          </Link>
+        </Text>
       </VStack>
     </Flex>
   )

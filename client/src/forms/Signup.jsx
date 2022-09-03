@@ -2,7 +2,6 @@ import {
   Button,
   Flex,
   FormControl,
-  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Heading,
@@ -11,32 +10,30 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react"
-import { ExternalLinkIcon } from "@chakra-ui/icons"
+import { ExternalLinkIcon, WarningIcon, CheckCircleIcon } from "@chakra-ui/icons"
 import { useState, useEffect } from "react"
 import { Link as ReactLink } from "react-router-dom"
+import { registerUser } from "../Services/Services"
 
 const Signin = () => {
-  const [user, setUser] = useState("")
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errorMsg, setErrorMsg] = useState("")
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
-    // if(user.length <  5) setUserError('User')
-  }, [user, password])
+    setErrorMsg("")
+  }, [username, email, password])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    alert("form submitted")
-
-    // try {
-    //   setSuccess(true)
-    //   alert(success)
-    // } catch (error) {
-    //   setErrorMsg = "error"
-    //   alert(error)
-    // }
+    try {
+      const { data } = await registerUser({ username, email, password })
+      setSuccess(true)
+    } catch (err) {
+      setErrorMsg(err.message)
+    }
   }
   return (
     <Flex
@@ -52,14 +49,44 @@ const Signin = () => {
             Welcome to Thematick! Please enter your details to create an account
           </Text>
         </Flex>
+        {
+          success && 
+          (
+            <Flex
+              border="0.5px solid green"
+              borderRadius="5"
+              color="green"
+              p="0.5rem"
+              w="full"
+              align="center"
+              gap="1em"
+            >
+              <CheckCircleIcon /> <Text>Registartion successfull !! Please verify your email</Text>
+            </Flex>
+          )
+          
+        }
+        {errorMsg && (
+          <Flex
+            border="0.5px solid red"
+            borderRadius="5"
+            color="red"
+            p="0.5rem"
+            w="full"
+            align="center"
+            gap="1em"
+          >
+            <WarningIcon /> <Text>Error : {errorMsg}</Text>
+          </Flex>
+        )}
         <FormControl>
           <FormLabel>Username</FormLabel>
           <Input
             type="text"
             id="username"
             autoComplete="off"
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
             isRequired
             bg="white"
           />
