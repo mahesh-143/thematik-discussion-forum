@@ -68,6 +68,12 @@ router.get(`/:id`, async (req, res, next) => {
           orderBy: {
             createdAt: "desc",
           },
+          select : {
+            id: true,
+        message: true,
+        parentId : true,
+        createdAt: true,
+          }
         },
       },
     })
@@ -84,31 +90,25 @@ router.get(`/:id`, async (req, res, next) => {
 router.post(`/:id/comments`,  async (req, res, next) => {
   try{
     const {message, parentId} = req.body
-    const {postId} = req.params.id
-    // const {userId} = findUserById(req.user.userId)
-    const user = findUserById('8ca96a49-c65a-4f6e-8f42-556e029e6da6')
+    const postId = req.params.id
+
+    const uid = '8ca96a49-c65a-4f6e-8f42-556e029e6da6'
     const newComment = await db.comment.create({
       data : 
       {
         message,
-        user: { connect : {id : user.id}},
-        parentId,
-        post : {connect : {id : postId}},
+        userId: uid,
+        parentId : '4059bfbc-fa7b-4e79-8e6a-f3c688cb87a4',
+        postId,
       },
       select: {
         id: true,
         message: true,
         parentId : true,
         createdAt: true,
-        user: {
-          select : {
-            id: true,
-            username: true,
-          }
-        }
       }
     })
-    return res.status(200).json({ message: "Post created", newPost })
+    return res.status(200).json({ message: "Comment created", newComment })
   }
   catch(err) {
     next(err)
