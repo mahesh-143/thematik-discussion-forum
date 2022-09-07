@@ -64,6 +64,11 @@ router.get(`/:id`, async (req, res, next) => {
         postBody: true,
         authorId: true,
         votes: true,
+        author : {
+          select: {
+            username : true,
+          }
+        },
         comments: {
           orderBy: {
             createdAt: "desc",
