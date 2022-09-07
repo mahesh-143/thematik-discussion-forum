@@ -27,32 +27,39 @@ const Home = () => {
   return (
     <>
       <VStack w="40em" px="1em" margin="auto">
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          pt="1em"
-          px="1em"
-          w="full"
-        >
-          <Button
-            leftIcon={<AiOutlineSortDescending />}
-            fontWeight="normal"
-            variant="ghost"
-          >
-            Latest
-          </Button>
-          <Link to="submit">
+     
+     <Flex  w="full" justify="space-between">
+      <Link to="submit">
             <Button
               rightIcon={<AddIcon />}
               fontWeight="normal"
               color="white"
               bg="brand.100"
+              mt="1em"
+              display={{base: "block", md: "none"}}
             >
               Add Post
             </Button>
-          </Link>
+        </Link>
+
+      <Link to="createtheme">
+            <Button
+              rightIcon={<AddIcon />}
+              fontWeight="normal"
+              variant="outline"
+              borderColor="brand.100"
+              color="brand.100"
+              mt="1em"
+              display={{base: "block", md: "none"}}
+            >
+              Create Theme
+            </Button>
+        </Link>
         </Flex>
+          
+        
         <VStack minH="100vh" gap="1em" pt="1em" pb="2em">
+    
           {mappedPosts}
         </VStack>
       </VStack>

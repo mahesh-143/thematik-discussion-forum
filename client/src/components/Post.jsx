@@ -1,5 +1,5 @@
-import { Avatar, Box, Flex, Heading, Link, Text } from "@chakra-ui/react"
-import { StatUpArrow, StatDownArrow } from "@chakra-ui/react"
+import { Avatar, Box, Divider, Flex, Heading, Link, Tag, Text } from "@chakra-ui/react"
+import { ArrowUpIcon, ArrowDownIcon, ChatIcon } from "@chakra-ui/icons"
 import { AiOutlineEllipsis } from "react-icons/ai"
 import { Link as ReactLink } from "react-router-dom"
 
@@ -15,9 +15,9 @@ const Post = ({ post }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatUpArrow />
+          <ArrowUpIcon w={5} h={5}/>
           <Text>{post.votes}</Text>
-          <StatDownArrow />
+          <ArrowDownIcon w={5} h={5}/>
         </Flex>
 
         <Flex flexDirection="column" gap="1em" w="full">
@@ -34,17 +34,22 @@ const Post = ({ post }) => {
               {post.postBody}
             </Text>
           </ReactLink>
+
+          <Divider />
+
           <Flex alignItems="center" justifyContent="space-between">
+            <Flex direction="column" align="center" gap="0.5em">
+            <Text size="sm">In <Tag>ProgrammingClub</Tag></Text>
             <Flex alignItems="center" gap="0.5em">
               <Avatar
                 size="xs"
                 name={post.author.username}
-                src={"https://avatars.dicebear.con/api/male/username.svg"}
               />
               <Text fontSize="sm">Posted by <Link as={ReactLink} to="" color="blue">{post.author.username}</Link></Text>
             </Flex>
+            </Flex>
             <Text fontSize="sm" opacity="50%">6h ago</Text>
-            <Text fontSize="sm" opacity="50%">43 comments</Text>
+            <Text fontSize="sm" opacity="50%"><ChatIcon />  34</Text>
           </Flex>
         </Flex>
       </Flex>

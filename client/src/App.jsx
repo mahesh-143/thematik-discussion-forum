@@ -11,6 +11,7 @@ import { useDisclosure } from "@chakra-ui/react"
 import AuthRoute from "./components/AuthRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PostPage from "./pages/PostPage"
+import CreateTheme from "./forms/CreateTheme"
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -38,6 +39,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/createtheme"
+            element={
+              <ProtectedRoute>
+                <CreateTheme />
+              </ProtectedRoute>
+            }
+            />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Route>
 
