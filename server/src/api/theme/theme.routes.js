@@ -39,12 +39,17 @@ router.delete("/theme/:id", isAuth, async (req, res, next) => {
 
 router.get("/all", async (req, res, next) => {
   try {
-    const themes = await db.theme.findMany()
+    const themes = await db.theme.findMany({
+      include : {
+       post : true,
+      }
+    })
     return res.status(200).json({ themes })
   } catch (err) {
     next(err)
   }
 })
+
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params
