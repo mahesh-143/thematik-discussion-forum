@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const RightSideBar = () => {
   return (
-    <Box bg="white" minHeight="100vh" minW="15em" pt="2em" display={{base: 'none', md: 'block'}}>
+    <Box bg="white" minHeight="100vh" minW="15em"  pt="2em" display={{base: 'none', md: 'block'}} position="sticky" right="0">
         <VStack pos="fixed" p="1em">
          <Link to="submit">
             <Button

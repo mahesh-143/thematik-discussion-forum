@@ -13,7 +13,7 @@ import { AiOutlineHome, AiOutlineAppstore, AiOutlineAppstoreAdd, AiOutlineBell }
 
 const LinkItems = [
   { name: "Home", link: "/", icon: <AiOutlineHome size="1.2em" /> },
-  { name: "Themes", link: "#", icon: <AiOutlineAppstore size="1.2em" /> },
+  { name: "Themes", link: "/themes", icon: <AiOutlineAppstore size="1.2em" /> },
   { name: "Your Themes", link: "#", icon: <AiOutlineAppstoreAdd size="1.2em" /> },
   { name: "Notification", link: "#", icon: <AiOutlineBell size="1.2em" /> },
 ]

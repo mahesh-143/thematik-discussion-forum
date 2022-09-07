@@ -2,7 +2,6 @@ import client from "./AxiosClient";
 
 export function getFeed() {
     return client.get('/post/all')
-
 }
 
 export function getPost(id) {

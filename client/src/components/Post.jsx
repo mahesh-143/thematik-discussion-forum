@@ -4,6 +4,7 @@ import { AiOutlineEllipsis } from "react-icons/ai"
 import { Link as ReactLink } from "react-router-dom"
 
 const Post = ({ post }) => {
+  console.log(post)
   return (
     <Box bg="white" w="full" mx="1em" p="1em" borderRadius={5}>
       <Flex>

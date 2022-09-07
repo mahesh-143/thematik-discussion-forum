@@ -12,6 +12,7 @@ import AuthRoute from "./components/AuthRoute"
 import ProtectedRoute from "./components/ProtectedRoute"
 import PostPage from "./pages/PostPage"
 import CreateTheme from "./forms/CreateTheme"
+import Themes from "./pages/Themes"
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -52,6 +53,7 @@ function App() {
 
         <Route element={<WithSidebar isOpen={isOpen} onClose={onClose} />}>
           <Route path="/" element={<Home />} />
+          <Route path="/themes" element={<Themes />} />
           <Route path="/post/:id" element={<PostPage />} />
         </Route>
       </Routes>
