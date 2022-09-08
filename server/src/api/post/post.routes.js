@@ -41,6 +41,7 @@ router.get(`/all`, async (req, res, next) => {
       include: {
         Theme: true,
         votes: true,
+        comments : true,
         author: {
           select: {
             username: true,

@@ -55,8 +55,20 @@ router.get("/:id", async (req, res, next) => {
     const { id } = req.params
     const theme = await db.theme.findUnique({
       where: { id },
-      select: {
-        post: true
+      include: {
+        post: {
+          select : {
+            id: true,
+            title : true,
+            postBody : true,
+            comments : true,
+            author : {
+              select  : {
+                username : true,
+              }
+            }
+          }
+        }
       }
     })
 
