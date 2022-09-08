@@ -40,7 +40,12 @@ const Post = ({ post }) => {
 
           <Flex alignItems="center" justifyContent="space-between">
             <Flex direction="column" align="center" gap="0.5em">
-            <Text size="sm">In <Tag>ProgrammingClub</Tag></Text>
+              {
+                post.Theme &&
+            <ReactLink to={"/themes/" + post.Theme.id} >
+            <Text size="sm">In <Tag>{post.Theme.title}</Tag></Text>
+            </ReactLink>
+              }
             <Flex alignItems="center" gap="0.5em">
               <Avatar
                 size="xs"
@@ -50,7 +55,7 @@ const Post = ({ post }) => {
             </Flex>
             </Flex>
             <Text fontSize="sm" opacity="50%">6h ago</Text>
-            <Text fontSize="sm" opacity="50%"><ChatIcon />  34</Text>
+            <Text fontSize="sm" opacity="50%"><ChatIcon />  {post.comments.length}</Text>
           </Flex>
         </Flex>
       </Flex>

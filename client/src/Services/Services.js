@@ -15,6 +15,9 @@ export function loginUser(data) {
 export function registerUser(data) {
     return client.post('auth/register', data)
 }
+export function createTheme(data) {
+    return client.post('theme/createtheme', data)
+}
 export function createPost(data) {
     return client.post('/post/makePost', data)
 }
@@ -24,4 +27,8 @@ export function createComment(data, id) {
 }
 export function getThemes() {
     return client.get('/theme/all')
+}
+
+export function getTheme(id){
+    return client.get(`theme/${id}`)
 }

@@ -2,39 +2,29 @@ import {
   FormControl,
   Input,
   Textarea,
-  Select,
   Box,
   VStack,
   Button,
   Heading,
 } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { createPost, getThemes } from "../Services/Services"
+import { createTheme } from "../Services/Services"
 
 const SubmitPost = () => {
   const [title, setTitle] = useState("")
-  const [postBody, setPostBody] = useState("")
-  const [themes, setThemes] = useState(null)
+  const [description, setDescription] = useState("")
 
   const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { data } = await createPost({
+    const { data } = await createTheme({
       title,
-      postBody,
-      theme: e.target.theme.value,
+      description,
     })
     console.log(data)
-    navigate("/")
+    navigate(`theme/${data.theme.id}`)
   }
-  const fetchThemes = async () => {
-    const { data } = await getThemes()
-    setThemes(data.themes)
-  }
-  useEffect(() => {
-    fetchThemes()
-  }, [])
 
   return (
     <Box maxW="container.md" m="auto" p="2em">
@@ -60,8 +50,8 @@ const SubmitPost = () => {
               placeholder="Description(optional)"
               size="sm"
               resize="vertical"
-              value={postBody}
-              onChange={(e) => setPostBody(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               bg="white"
               borderRadius={5}
             />
