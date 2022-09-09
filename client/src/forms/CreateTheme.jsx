@@ -23,7 +23,7 @@ const SubmitPost = () => {
       description,
     })
     console.log(data)
-    navigate(`theme/${data.theme.id}`)
+    navigate(`/themes`)
   }
 
   return (

@@ -9,13 +9,13 @@ import {
   DrawerBody,
 } from "@chakra-ui/react"
 import { Link as ReactLink } from "react-router-dom"
-import { AiOutlineHome, AiOutlineAppstore, AiOutlineAppstoreAdd, AiOutlineBell } from "react-icons/ai"
+import { AiOutlineHome, AiOutlineAppstore, AiOutlineAppstoreAdd, AiOutlineUser } from "react-icons/ai"
 
 const LinkItems = [
   { name: "Home", link: "/", icon: <AiOutlineHome size="1.2em" /> },
   { name: "Themes", link: "/themes", icon: <AiOutlineAppstore size="1.2em" /> },
   { name: "Your Themes", link: "#", icon: <AiOutlineAppstoreAdd size="1.2em" /> },
-  { name: "Notification", link: "#", icon: <AiOutlineBell size="1.2em" /> },
+  { name: "My Profile", link: "/myprofile", icon: <AiOutlineUser size="1.2em" /> },
 ]
 
 const NavItem = ({ icon, link, children, ...rest }) => {

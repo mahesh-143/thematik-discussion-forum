@@ -1,34 +1,40 @@
-import client from "./AxiosClient";
+import client from "./AxiosClient"
 
 export function getFeed() {
-    return client.get('/post/all')
+  return client.get("/post/all")
 }
 
 export function getPost(id) {
-    return client.get(`/post/${id}`)
+  return client.get(`/post/${id}`)
 }
 
+export function getUser(username) {
+  return client.get(`user/${username}`)
+}
+export function getCurrentUser() {
+  return client.get("user/profile")
+}
 export function loginUser(data) {
-    return client.post('/auth/login', data)
+  return client.post("/auth/login", data)
 }
 
 export function registerUser(data) {
-    return client.post('auth/register', data)
+  return client.post("auth/register", data)
 }
 export function createTheme(data) {
-    return client.post('theme/createtheme', data)
+  return client.post("theme/createtheme", data)
 }
 export function createPost(data) {
-    return client.post('/post/makePost', data)
+  return client.post("/post/makePost", data)
 }
 
 export function createComment(data, id) {
-    return client.post(`/post/${id}/comments`, data)
+  return client.post(`/post/${id}/comments`, data)
 }
 export function getThemes() {
-    return client.get('/theme/all')
+  return client.get("/theme/all")
 }
 
-export function getTheme(id){
-    return client.get(`theme/${id}`)
+export function getTheme(id) {
+  return client.get(`theme/${id}`)
 }

@@ -4,7 +4,6 @@ import { AiOutlineEllipsis } from "react-icons/ai"
 import { Link as ReactLink } from "react-router-dom"
 
 const Post = ({ post }) => {
-  console.log(post)
   return (
     <Box bg="white" w="full" mx="1em" p="1em" borderRadius={5}>
       <Flex>
@@ -51,7 +50,7 @@ const Post = ({ post }) => {
                 size="xs"
                 name={post.author.username}
               />
-              <Text fontSize="sm">Posted by <Link as={ReactLink} to="" color="blue">{post.author.username}</Link></Text>
+              <Text fontSize="sm">Posted by <Link as={ReactLink} to={"user/"+post.author.username} color="blue">{post.author.username}</Link></Text>
             </Flex>
             </Flex>
             <Text fontSize="sm" opacity="50%">6h ago</Text>

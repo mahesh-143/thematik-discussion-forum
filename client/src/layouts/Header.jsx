@@ -60,11 +60,12 @@ const Header = ({ onOpen }) => {
                   <MenuButton>
                     <Avatar
                       size="sm"
-                      src={"https://avatars.dicebear.con/api/male/username.svg"}
+                      name=""
                     />
                   </MenuButton>
                   <MenuList>
-                    <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+                  <Link to="/myprofile"><MenuItem>My Profile</MenuItem></Link>
+                    <MenuItem onClick={logoutHandler} color="red">Logout</MenuItem>
                   </MenuList>
                 </Menu>
               </Flex>
