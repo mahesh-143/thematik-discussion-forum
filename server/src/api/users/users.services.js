@@ -32,6 +32,28 @@ const findUserById = (id) => {
     where: {
       id,
     },
+    include : {
+      post: {
+        select : {
+          id: true,
+          title : true,
+          postBody : true,
+          comments : true,
+          Theme : {
+            select : {
+              id : true,
+              title : true,
+            }
+          },
+          author : {
+            select  : {
+              username : true,
+            }
+          }
+        }
+      },
+      theme : true,
+    }
   })
 }
 
