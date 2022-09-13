@@ -23,8 +23,10 @@ const Header = ({ onOpen }) => {
     setUserLogout();
   };
   const user = JSON.parse(localStorage.getItem('user'))
+  if(user) {
   console.log(user)
   console.log("username : ", user.username)
+  }
   return (
     <Box
       bg="white"
@@ -57,7 +59,7 @@ const Header = ({ onOpen }) => {
               display={{ md: "none" }}
             />
 
-            {accessToken ? (
+            {user ? (
               <Flex align="center" justify="center" gap="1rem">
                 <Menu>
                   <MenuButton>
