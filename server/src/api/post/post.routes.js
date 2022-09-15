@@ -26,10 +26,17 @@ router.post("/makepost", isAuth, async (req, res, next) => {
 router.delete(`/:id`, isAuth, async (req, res, next) => {
   try {
     const { id } = req.params
-    const post = await db.post.delete({
-      where: { id },
+    const post = await db.post.findUnique({ where: { id } })
+    if(!post){
+      return res.status(404).json({ message: "Post not found" })
+    }
+    if (post.authorId !== req.user.userId) {
+      return res.status(403).json({ message: "Unauthorized" })
+    }
+    await db.post.delete({
+      where: { id:post.id },
     })
-    return res.status(200).json({ message: "Post deleted", post })
+    return res.status(200).json({ message: "Post deleted" })
   } catch (err) {
     next(err)
   }
@@ -41,10 +48,11 @@ router.get(`/all`, async (req, res, next) => {
       include: {
         Theme: true,
         votes: true,
-        comments : true,
+        comments: true,
         author: {
           select: {
             username: true,
+            id: true
           },
         },
       },
@@ -65,20 +73,21 @@ router.get(`/:id`, async (req, res, next) => {
         postBody: true,
         authorId: true,
         votes: true,
-        author : {
+        author: {
           select: {
-            username : true,
+            username: true,
+            id:true
           }
         },
         comments: {
           orderBy: {
             createdAt: "desc",
           },
-          select : {
+          select: {
             id: true,
-        message: true,
-        parentId : true,
-        createdAt: true,
+            message: true,
+            parentId: true,
+            createdAt: true,
           }
         },
       },
@@ -93,30 +102,30 @@ router.get(`/:id`, async (req, res, next) => {
   }
 })
 
-router.post(`/:id/comments`,  async (req, res, next) => {
-  try{
-    const {message, parentId} = req.body
+router.post(`/:id/comments`, async (req, res, next) => {
+  try {
+    const { message, parentId } = req.body
     const postId = req.params.id
 
     const uid = '8ca96a49-c65a-4f6e-8f42-556e029e6da6'
     const newComment = await db.comment.create({
-      data : 
+      data:
       {
         message,
         userId: uid,
-        parentId : '4059bfbc-fa7b-4e79-8e6a-f3c688cb87a4',
+        parentId: '4059bfbc-fa7b-4e79-8e6a-f3c688cb87a4',
         postId,
       },
       select: {
         id: true,
         message: true,
-        parentId : true,
+        parentId: true,
         createdAt: true,
       }
     })
     return res.status(200).json({ message: "Comment created", newComment })
   }
-  catch(err) {
+  catch (err) {
     next(err)
   }
 })
@@ -141,7 +150,6 @@ router.post(`/:id/upvote`, isAuth, async (req, res, next) => {
 
     //case: if vote is present and is upvote
     //then delete the upvote
-    console.log(isExist)
     if (isExist && isExist.value === 1) {
       await db.postvote.delete({
         where: {
@@ -171,7 +179,7 @@ router.post(`/:id/upvote`, isAuth, async (req, res, next) => {
 
     //case: if vote doesnt exist
     //then create new upvote
-    const vote = db.postvote.create({
+    const vote = await db.postvote.create({
       data: {
         post: { connect: { id: postId } },
         author: { connect: { id: userId } },
