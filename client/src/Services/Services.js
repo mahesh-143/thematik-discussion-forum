@@ -7,6 +7,17 @@ export function getFeed() {
 export function getPost(id) {
   return client.get(`/post/${id}`)
 }
+export function deletePost(id) {
+  return client.delete(`/post/${id}`)
+}
+
+export function upvotePost(id){
+  return client.post(`/post/${id}/upvote`)
+}
+
+export function downvotePost(id){
+  return client.post(`/post/${id}/downvote`)
+}
 
 export function getUser(username) {
   return client.get(`user/${username}`)

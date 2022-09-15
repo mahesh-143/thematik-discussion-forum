@@ -123,7 +123,7 @@ router.post('/refreshToken', async (req, res, next) => {
     next(err);
   }
 });
-router.post('/verify/:id/:token', async (req, res, next) => {
+router.get('/verify/:id/:token', async (req, res, next) => {
   try {
     const user = await findUserById(req.params.id)
     if (!user) {

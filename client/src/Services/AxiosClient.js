@@ -24,11 +24,9 @@ client.interceptors.response.use(
         if (res.status === 401) {
             const refreshToken = localStorage.getItem('refreshToken')
             const { data } = await client.post('/auth/refreshToken', { refreshToken })
-            console.log(data.accessToken);
             localStorage.getItem('accessToken', data.accessToken)
         }
         if (error.response.data) {
-            console.log(error.response.data);
             return Promise.reject(error.response.data);
         }
         return Promise.reject(error);

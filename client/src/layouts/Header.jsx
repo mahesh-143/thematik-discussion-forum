@@ -22,11 +22,7 @@ const Header = ({ onOpen }) => {
   const logoutHandler = () => {
     setUserLogout();
   };
-  const user = JSON.parse(localStorage.getItem('user'))
-  if(user) {
-  console.log(user)
-  console.log("username : ", user.username)
-  }
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <Box
       bg="white"
@@ -63,14 +59,15 @@ const Header = ({ onOpen }) => {
               <Flex align="center" justify="center" gap="1rem">
                 <Menu>
                   <MenuButton>
-                    <Avatar
-                      size="sm"
-                      name={user.username}
-                    />
+                    <Avatar size="sm" name={user.username} />
                   </MenuButton>
                   <MenuList>
-                  <Link to="/myprofile"><MenuItem>My Profile</MenuItem></Link>
-                    <MenuItem onClick={logoutHandler} color="red">Logout</MenuItem>
+                    <Link to="/myprofile">
+                      <MenuItem>My Profile</MenuItem>
+                    </Link>
+                    <MenuItem onClick={logoutHandler} color="red">
+                      Logout
+                    </MenuItem>
                   </MenuList>
                 </Menu>
               </Flex>
