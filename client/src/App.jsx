@@ -16,6 +16,7 @@ import Themes from "./pages/Themes"
 import ThemePage from "./pages/ThemePage"
 import ProfilePage from "./pages/ProfilePage"
 import UserPage from "./pages/UserPage"
+import MyThemes from "./pages/MyThemes"
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,20 +51,25 @@ function App() {
                 <CreateTheme />
               </ProtectedRoute>
             }
-            />
+          />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Route>
 
         <Route element={<WithSidebar isOpen={isOpen} onClose={onClose} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/myprofile" element={<ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>} />
+          <Route
+            path="/myprofile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/user/:username" element={<UserPage />} />
           <Route path="/themes" element={<Themes />} />
           <Route path="/themes/:id" element={<ThemePage />} />
           <Route path="/post/:id" element={<PostPage />} />
-
+          <Route path="/mythemes" element={<MyThemes />} />
         </Route>
       </Routes>
     </>

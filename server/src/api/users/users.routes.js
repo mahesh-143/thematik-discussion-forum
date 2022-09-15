@@ -25,6 +25,7 @@ router.get("/:username", async (req, res, next) => {
             post: {
               select : {
                 id: true,
+                votes : true,
                 title : true,
                 postBody : true,
                 comments : true,

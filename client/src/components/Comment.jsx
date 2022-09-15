@@ -2,7 +2,7 @@ import { Avatar, Box, Flex, Link, Text, VStack } from "@chakra-ui/react"
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons"
 import {Link as ReactLink} from "react-router-dom"
 
-const Comment = () => {
+const Comment = (comment) => {
   return (
     <Box w="100%">
         <Flex>
@@ -22,15 +22,13 @@ const Comment = () => {
         <Flex alignItems="center" gap="0.5em" alignSelf="start">
         <Avatar
                 size="sm"
-                name="Jerry Doe"
+                name={comment.author.username}
               />
-              <Text fontSize="sm"><Link as={ReactLink} to="" color="blue">Jerry Doe</Link></Text>
+              <Text fontSize="sm"><Link as={ReactLink} to="" color="blue">{comment.author.username}</Link></Text>
               <Text opacity="50%" fontSize="sm">6h ago</Text>
         </Flex>
-        <Text as="p" >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt itaque nobis repellat!
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt itaque nobis repellat!
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt itaque nobis repellat!
+        <Text>
+              {comment.body}
         </Text>
         <Text opacity="50%" alignSelf="start">Reply</Text>
         </VStack>

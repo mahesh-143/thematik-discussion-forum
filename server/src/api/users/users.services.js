@@ -38,13 +38,8 @@ const findUserById = (id) => {
           id: true,
           title : true,
           postBody : true,
+          votes : true,
           comments : true,
-          Theme : {
-            select : {
-              id : true,
-              title : true,
-            }
-          },
           author : {
             select  : {
               username : true,
@@ -52,7 +47,11 @@ const findUserById = (id) => {
           }
         }
       },
-      theme : true,
+      theme : {
+         include : {
+          post : true,
+         }
+      },
     }
   })
 }

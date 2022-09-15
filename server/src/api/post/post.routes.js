@@ -73,6 +73,7 @@ router.get(`/:id`, async (req, res, next) => {
         postBody: true,
         authorId: true,
         votes: true,
+        Theme : true,
         author: {
           select: {
             username: true,
@@ -107,13 +108,13 @@ router.post(`/:id/comments`, async (req, res, next) => {
     const { message, parentId } = req.body
     const postId = req.params.id
 
-    const uid = '8ca96a49-c65a-4f6e-8f42-556e029e6da6'
+    const uid = req.user.userId
     const newComment = await db.comment.create({
       data:
       {
         message,
         userId: uid,
-        parentId: '4059bfbc-fa7b-4e79-8e6a-f3c688cb87a4',
+        parentId,
         postId,
       },
       select: {
