@@ -22,7 +22,7 @@ const Home = () => {
     posts &&
     posts.slice(0).reverse().map((post, index) => {
       const votesCount = post.votes.reduce((acc, b) => acc + b.value, 0)
-      const myVote = post.votes.find((vote) => vote.userId === user.id)
+      const myVote = post.votes.find((vote) => vote.userId === user?.id)
       const upvoteFlag = myVote?.value === 1
       const downvoteFlag = myVote?.value === -1
       return (

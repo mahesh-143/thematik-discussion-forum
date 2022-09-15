@@ -25,6 +25,7 @@ const PostPage = () => {
   const params = useParams()
   const [post, setPost] = useState("")
   const [comments, setComments] = useState([])
+  const { user } = useAuth()
 
   const fetchPost = async (id) => {
     const { data } = await getPost(id)
@@ -39,12 +40,9 @@ const PostPage = () => {
   const mappedComments =
     comments &&
     comments
-      .slice(0)
-      .reverse()
       .map((comment) => {
-        return (
-          <Comment key={comment.id} comment={{...comment}}/>
-        )
+        console.log(comment)
+        return <Comment key={comment.id} comment={{...comment}} />
       })
 
   return (
@@ -116,14 +114,14 @@ const PostPage = () => {
                     6h ago
                   </Text>
                   <Text fontSize="sm" opacity="50%">
-                    <ChatIcon /> 34
+                    <ChatIcon /> {post.comments.length}
                   </Text>
                 </Flex>
               </Flex>
             </Flex>
           </Box>
-        
-          <AddComment />
+
+          {user ? <AddComment /> : <Text>Login to add comment</Text>}
 
           <Divider />
           {mappedComments}

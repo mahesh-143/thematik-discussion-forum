@@ -19,14 +19,15 @@ import { useParams } from "react-router-dom"
 
 const AddComment = () => {
   const params = useParams()
-  const [body, setBody] = useState("")
+  const [message, setMessage] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log("form submitted")
+    const postId = params.id
     const { data } = await createComment({
-      id: params.id,
-      body,
+      postId,
+      message,
     })
     console.log(data)
   }
@@ -56,8 +57,8 @@ const AddComment = () => {
                 <FormLabel>Comment</FormLabel>
                 <Input
                   placeholder="Write comment"
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 />
               </FormControl>
             </ModalBody>
