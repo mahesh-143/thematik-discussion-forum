@@ -39,9 +39,9 @@ const PostPage = () => {
 
   const mappedComments =
     comments &&
-    comments.map((comment) => {
+    comments.map((comment, index) => {
       console.log(comment)
-      const votesCount = comment.votes.reduce((acc, b) => acc + b.value, 0)
+      const votesCount = comment.votes.reduce((acc, b) => acc + b?.value, 0)
       const myVote = comment.votes.find((vote) => vote.userId === user?.id)
       const upvoteFlag = myVote?.value === 1
       const downvoteFlag = myVote?.value === -1
@@ -49,6 +49,7 @@ const PostPage = () => {
         <Comment
           key={comment.id}
           setComments = {setComments}
+          index={index}
           comment={{
             ...comment,
             votesCount,

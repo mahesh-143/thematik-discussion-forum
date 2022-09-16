@@ -90,6 +90,7 @@ model Commentvote {
   comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
   userId    String
   commentId String
+  value     Int
 
   @@id([userId, commentId])
 }

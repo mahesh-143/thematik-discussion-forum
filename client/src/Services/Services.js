@@ -19,6 +19,18 @@ export function downvotePost(id){
   return client.post(`/post/${id}/downvote`)
 }
 
+export function upvoteComment(id){
+  return client.post(`/comment/${id}/upvote`)
+}
+
+export function downvoteComment(id){
+  return client.post(`/comment/${id}/downvote`)
+}
+
+export function deleteComment(id){
+  return client.delete(`/comment/${id}`)
+}
+
 export function getUser(username) {
   return client.get(`user/${username}`)
 }

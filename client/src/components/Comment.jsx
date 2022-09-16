@@ -2,12 +2,13 @@ import { Avatar, Box, Button, Divider, Flex, IconButton, Link, Text, useToast, V
 import { ArrowUpIcon, ArrowDownIcon, DeleteIcon} from "@chakra-ui/icons"
 import { Link as ReactLink } from "react-router-dom"
 import { useAuth } from "../Hooks/useAuth"
+import { upvoteComment, downvoteComment, deleteComment } from "../Services/Services"
 
 const Comment = ({ comment, setComments, index}) => {
   const {user} = useAuth()
   const toast = useToast()
   const deleteCommentHandler = async () => {
-    await deleteCommentHandler(comment.id)
+    await deleteComment(comment.id)
     setComments((comments) => comments.filter((_, i) => _.id !== comment.id))
     toast({
       position : "bottom-right",
@@ -44,8 +45,8 @@ const Comment = ({ comment, setComments, index}) => {
       } else {
         //if brand new vote
         const votes = [...comment.votes, data.vote]
-        setPosts((comment) => {
-          comment[index].votes = votes
+        setComments((comment) => {
+          comment[index].votes= votes
           comment[index].upvoteFlag = true
           return [...comment]
         })
@@ -80,7 +81,7 @@ const Comment = ({ comment, setComments, index}) => {
       } else {
         //if brand new vote
         const votes = [...comment.votes, data.vote]
-        setPosts((comment) => {
+        setComments((comment) => {
           comment[index].votes = votes
           comment[index].downvoteFlag = true
           return [...comment]
@@ -131,7 +132,7 @@ const Comment = ({ comment, setComments, index}) => {
             </Text>
             {
               comment.isOwner && (
-                <IconButton variant="ghost" opacity="50%"><DeleteIcon w={4} h={4}/></IconButton>
+                <IconButton variant="ghost" opacity="50%" onClick={deleteCommentHandler}><DeleteIcon w={4} h={4}/></IconButton>
               )
             }
           </Flex>
