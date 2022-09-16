@@ -89,10 +89,14 @@ router.get(`/:id`, async (req, res, next) => {
             message: true,
             parentId: true,
             createdAt: true,
+            votes : true,
             user : {
-              select : {username: true}
+              select : {
+                id : true,
+                username: true,
+              }
             }
-          }
+          },
         },
       },
     })

@@ -39,11 +39,26 @@ const PostPage = () => {
 
   const mappedComments =
     comments &&
-    comments
-      .map((comment) => {
-        console.log(comment)
-        return <Comment key={comment.id} comment={{...comment}} />
-      })
+    comments.map((comment) => {
+      console.log(comment)
+      const votesCount = comment.votes.reduce((acc, b) => acc + b.value, 0)
+      const myVote = comment.votes.find((vote) => vote.userId === user?.id)
+      const upvoteFlag = myVote?.value === 1
+      const downvoteFlag = myVote?.value === -1
+      return (
+        <Comment
+          key={comment.id}
+          setComments = {setComments}
+          comment={{
+            ...comment,
+            votesCount,
+            upvoteFlag,
+            downvoteFlag,
+            isOwner: comment.user.id === user?.id,
+          }}
+        />
+      )
+    })
 
   return (
     <>
