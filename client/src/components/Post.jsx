@@ -14,7 +14,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react"
-import { ArrowUpIcon, ArrowDownIcon, ChatIcon } from "@chakra-ui/icons"
+import { ArrowUpIcon, ArrowDownIcon, ChatIcon, DeleteIcon} from "@chakra-ui/icons"
 import { AiOutlineEllipsis } from "react-icons/ai"
 import { Link as ReactLink } from "react-router-dom"
 
@@ -143,20 +143,9 @@ const Post = ({ post, setPosts, index }) => {
                 {post.title}
               </Heading>
             </ReactLink>
-            <Menu>
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                icon={<AiOutlineEllipsis size="1.5em" />}
-                variant="ghost"
-                size="sm"
-              ></MenuButton>
-              <MenuList>
                 {post.isOwner && (
-                  <MenuItem onClick={deletePostHandler}>Delete Post</MenuItem>
+                  <IconButton variant="ghost" opacity="50%" onClick={deletePostHandler}><DeleteIcon w={4} h={4}/></IconButton>
                 )}
-              </MenuList>
-            </Menu>
           </Flex>
           <ReactLink to={"post/" + post.id}>
             <Text as="p" noOfLines={3}>

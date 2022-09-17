@@ -15,7 +15,7 @@ import { useState, useEffect } from "react"
 import { Link as ReactLink } from "react-router-dom"
 import { registerUser } from "../Services/Services"
 
-const Signin = () => {
+const Signup = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -61,7 +61,7 @@ const Signin = () => {
               align="center"
               gap="1em"
             >
-              <CheckCircleIcon /> <Text>Registartion successfull !! Please verify your email</Text>
+              <CheckCircleIcon /> <Text>Registartion successfull !! Please Sign In </Text>
             </Flex>
           )
           
@@ -138,4 +138,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default Signup

@@ -11,7 +11,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createTheme } from "../Services/Services"
 
-const SubmitPost = () => {
+const CreateTheme = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
@@ -73,4 +73,4 @@ const SubmitPost = () => {
   )
 }
 
-export default SubmitPost
+export default CreateTheme
