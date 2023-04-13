@@ -138,7 +138,7 @@ const Post = ({ post, setPosts, index }) => {
 
         <Flex flexDirection="column" gap="1em" w="full">
           <Flex alignItems="center" justifyContent="space-between">
-            <ReactLink to={"/post/" + post.id}>
+            <ReactLink to={"post/" + post.id}>
               <Heading as="h3" size="md" fontWeight="500">
                 {post.title}
               </Heading>

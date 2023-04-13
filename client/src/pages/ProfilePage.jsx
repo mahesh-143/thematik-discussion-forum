@@ -38,7 +38,7 @@ const ProfilePage = () => {
               votesCount,
               upvoteFlag,
               downvoteFlag,
-              isOwner: post.author.id === user?.id,
+              isOwner: true,
             }}
           />
         )

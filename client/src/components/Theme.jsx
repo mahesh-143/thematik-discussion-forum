@@ -3,7 +3,7 @@ import { Link as ReactLink } from "react-router-dom"
 
 const Theme = ({ theme }) => {
   return (
-    <ReactLink to={theme.id}>
+    <ReactLink to={`/themes/${theme.id}`}>
       <VStack
         bg="white"
         w="20em"

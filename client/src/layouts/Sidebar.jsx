@@ -13,9 +13,9 @@ import { AiOutlineHome, AiOutlineAppstore, AiOutlineAppstoreAdd, AiOutlineUser }
 
 const LinkItems = [
   { name: "Home", link: "/", icon: <AiOutlineHome size="1.2em" /> },
-  { name: "Themes", link: "/themes", icon: <AiOutlineAppstore size="1.2em" /> },
-  { name: "Your Themes", link: "/mythemes", icon: <AiOutlineAppstoreAdd size="1.2em" /> },
-  { name: "My Profile", link: "/myprofile", icon: <AiOutlineUser size="1.2em" /> },
+  { name: "Themes", link: "themes", icon: <AiOutlineAppstore size="1.2em" /> },
+  { name: "Your Themes", link: "mythemes", icon: <AiOutlineAppstoreAdd size="1.2em" /> },
+  { name: "My Profile", link: "myprofile", icon: <AiOutlineUser size="1.2em" /> },
 ]
 
 const NavItem = ({ icon, link, children, ...rest }) => {
